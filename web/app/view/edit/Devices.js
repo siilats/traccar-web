@@ -80,7 +80,8 @@ Ext.define('Traccar.view.edit.Devices', {
     },
 
     listeners: {
-        selectionchange: 'onSelectionChange'
+        rowclick: 'onSelectionChange',
+        itemkeyup: 'onSelectionChange'
     },
 
     viewConfig: {
@@ -109,7 +110,8 @@ Ext.define('Traccar.view.edit.Devices', {
         }, {
             text: Strings.deviceIdentifier,
             dataIndex: 'uniqueId',
-            hidden: true
+            hidden: true,
+            filter: 'string'
         }, {
             text: Strings.sharedPhone,
             dataIndex: 'phone',
