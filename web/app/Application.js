@@ -147,11 +147,6 @@ Ext.define('Traccar.Application', {
         }
     },
 
-    searchAddress: function () {
-        console.log("lol")
-
-    },
-
     showEvents: function (show) {
         var rootPanel = Ext.getCmp('rootPanel');
         if (rootPanel) {
