@@ -117,9 +117,7 @@ Ext.define('Traccar.view.edit.DevicesController', {
             }
             this.setValue(value.value)
         };
-        console.log(Ext.getStore('Geofences').load());
         setTimeout(function () {
-            console.log(Ext.getStore('Geofences').getData());
             var menu = self.view.headerCt.getMenu();
             var geofences = [];
             Ext.getStore('Geofences').getData().items.forEach(function (item) {
