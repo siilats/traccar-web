@@ -131,6 +131,7 @@ Ext.define('Traccar.view.ReportController', {
         dialog.callingPanel = this;
         dialog.lookupReference('deviceField').setValue(this.deviceId);
         dialog.lookupReference('groupField').setValue(this.groupId);
+        dialog.lookupReference('emailField').setValue(this.userId);
         emailField.setValue(this.userId);
         purchaseField.setValue(this.purchaseId);
         if (this.eventType !== undefined) {
