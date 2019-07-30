@@ -80,6 +80,8 @@ Ext.define('Traccar.view.edit.UsersController', {
             this.setValue(value.value);
         };
         this.lookupReference('userUsersButton').setHidden(!Traccar.app.getUser().get('admin'));
+        Ext.getStore('Users').load();
+        this.lookupReference('userUsersButton').setHidden(!Traccar.app.getUser().get('admin'));
         this.lookupReference('userDriversButton').setHidden(
             Traccar.app.getVehicleFeaturesDisabled() || Traccar.app.getBooleanAttributePreference('ui.disableDrivers'));
         this.lookupReference('userAttributesButton').setHidden(

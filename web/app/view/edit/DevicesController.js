@@ -117,6 +117,8 @@ Ext.define('Traccar.view.edit.DevicesController', {
             }
             this.setValue(value.value)
         };
+        deviceReadonly = Traccar.app.getPreference('deviceReadonly', false) && !Traccar.app.getUser().get('admin');
+        readonly = Traccar.app.getPreference('readonly', false) && !Traccar.app.getUser().get('admin');
         this.lookupReference('toolbarAddButton').setDisabled(readonly || deviceReadonly);
         this.lookupReference('toolbarDeviceMenu').setHidden(readonly || deviceReadonly);
 
