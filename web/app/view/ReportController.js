@@ -103,11 +103,36 @@ Ext.define('Traccar.view.ReportController', {
 
     onConfigureClick: function () {
         var dialog = Ext.create('Traccar.view.dialog.ReportConfig');
-        dialog.lookupReference('eventTypeField').setHidden(this.lookupReference('reportTypeField').getValue() !== 'events');
-        dialog.lookupReference('chartTypeField').setHidden(this.lookupReference('reportTypeField').getValue() !== 'chart');
+        var emailField = dialog.lookupReference('emailField');
+        var purchaseField = dialog.lookupReference('purchaseField');
+        var generalFields = [ 'deviceField', 'groupField', 'eventTypeField', 'chartTypeField', 'periodField'];
+
+        if(this.lookupReference('reportTypeField').getValue() === 'disputes') {
+            generalFields.forEach(function (value) {
+                var lookupComponent = dialog.lookupReference(value);
+                if(lookupComponent !== null) {
+                    lookupComponent.setHidden(true)
+                }
+            });
+            emailField.setHidden(false);
+            purchaseField.setHidden(false);
+        } else {
+            generalFields.forEach(function (value) {
+                var lookupComponent = dialog.lookupReference(value);
+                if(lookupComponent !== null) {
+                    lookupComponent.setHidden(false)
+                }
+            });
+            dialog.lookupReference('eventTypeField').setHidden(this.lookupReference('reportTypeField').getValue() !== 'events');
+            dialog.lookupReference('chartTypeField').setHidden(this.lookupReference('reportTypeField').getValue() !== 'chart');
+            emailField.setHidden(true);
+            purchaseField.setHidden(true);
+        }
         dialog.callingPanel = this;
         dialog.lookupReference('deviceField').setValue(this.deviceId);
         dialog.lookupReference('groupField').setValue(this.groupId);
+        emailField.setValue(this.userId);
+        purchaseField.setValue(this.purchaseId);
         if (this.eventType !== undefined) {
             dialog.lookupReference('eventTypeField').setValue(this.eventType);
         } else {
@@ -140,7 +165,7 @@ Ext.define('Traccar.view.ReportController', {
     updateButtons: function () {
         var reportType, disabled, devices, time;
         reportType = this.lookupReference('reportTypeField').getValue();
-        devices = this.deviceId && this.deviceId.length !== 0 || this.groupId && this.groupId.length !== 0;
+        devices = this.deviceId && this.deviceId.length !== 0 || this.groupId && this.groupId.length !== 0 || (reportType === 'disputes' && this.purchaseId);
         time = this.fromDate && this.fromTime && this.toDate && this.toTime;
         disabled = !reportType || !devices || !time || this.reportProgress;
         this.lookupReference('showButton').setDisabled(disabled);
@@ -182,6 +207,8 @@ Ext.define('Traccar.view.ReportController', {
                     },
                     params: {
                         deviceId: this.deviceId,
+                        userId: this.userId,
+                        purchaseId: this.purchaseId,
                         groupId: this.groupId,
                         type: this.eventType,
                         from: from.toISOString(),
@@ -425,6 +452,9 @@ Ext.define('Traccar.view.ReportController', {
             this.getView().getLayout().setActiveItem('grid');
         } else if (newValue === 'events') {
             this.getGrid().reconfigure('ReportEvents', this.eventsColumns);
+            this.getView().getLayout().setActiveItem('grid');
+        } else if (newValue === 'disputes') {
+            this.getGrid().reconfigure('ReportDispute', this.routeColumns);
             this.getView().getLayout().setActiveItem('grid');
         } else if (newValue === 'summary') {
             this.getGrid().reconfigure('ReportSummary', this.summaryColumns);
