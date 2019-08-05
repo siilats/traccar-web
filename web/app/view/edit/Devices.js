@@ -185,11 +185,5 @@ Ext.define('Traccar.view.edit.Devices', {
             dataIndex: 'lastUpdate',
             renderer: Traccar.AttributeFormatter.getFormatter('lastUpdate')
         }]
-    },
-    style: {
-        overflow: 'visible'
-    },
-    listeners: {
-        afterrender: function (c) {}
     }
 });
