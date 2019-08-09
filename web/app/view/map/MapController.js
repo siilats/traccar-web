@@ -148,6 +148,13 @@ Ext.define('Traccar.view.map.MapController', {
         }
     },
 
+    updateMarkers: function () {
+        this.getView().getMarkersSource().clear();
+        if(this.lookupReference('showMarkersButton').pressed) {
+            this.filterDevices()
+        }
+    },
+
     zoomToAllDevices: function () {
         this.zoomToAllPositions(Ext.getStore('LatestPositions').getData().items);
     }

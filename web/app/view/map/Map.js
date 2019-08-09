@@ -68,6 +68,12 @@ Ext.define('Traccar.view.map.Map', {
             stateful: false,
             enableToggle: false,
             tooltip: Strings.reportEvents
+        },{
+            handler: 'updateMarkers',
+            reference: 'showMarkersButton',
+            glyph: 'xf2b4@FontAwesome',
+            pressed: true,
+            stateId: 'show-markers-button'
         }, {
             handler: 'updateGeofences',
             reference: 'showGeofencesButton',
