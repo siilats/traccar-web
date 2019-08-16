@@ -71,7 +71,7 @@ Ext.define('Traccar.view.map.Map', {
         },{
             handler: 'updateMarkers',
             reference: 'showMarkersButton',
-            glyph: 'xf2b4@FontAwesome',
+            glyph: 'xf21c@FontAwesome',
             pressed: true,
             stateId: 'show-markers-button'
         }, {
