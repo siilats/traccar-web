@@ -13,6 +13,26 @@ A new version is being developed https://github.com/traccar/traccar-web/tree/mod
 
 You can read about why write a new client here https://github.com/traccar/traccar-web/issues/592
 
+## Deployment process
+
+1. Install required binaries and sources, this part is executed once.
+    ```bash
+    wget https://www.dropbox.com/s/6xcajlcyn0hg68d/ext-6.2.0-gpl.zip && 
+    wget http://cdn.sencha.com/cmd/6.7.0.37/no-jre/SenchaCmd-6.7.0.37-linux-amd64.sh.zip
+    
+    unzip SenchaCmd-6.7.0.37-linux-amd64.sh.zip
+    ./SenchaCmd-6.7.0.37-linux-amd64.sh // follow instructions here
+    unzip ext-6.2.0-gpl.zip
+    ```
+
+2. Run script
+```bash
+cd ./tools && ./minify.sh
+```
+You'll get app.min.js generated in `web` folder that's used by traccar in production.
+No more steps needed, when traccar starts it'll spot this file and serve it statially 
+by root path
+
 ## Team
 
 - Anton Tananaev ([anton@traccar.org](mailto:anton@traccar.org))
