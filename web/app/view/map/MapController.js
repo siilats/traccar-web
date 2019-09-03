@@ -116,6 +116,7 @@ Ext.define('Traccar.view.map.MapController', {
             Number(record.data.lon),
             Number(record.data.lat)
         ]));
+        rootView.getMapView().setZoom(20);
 
     },
 
