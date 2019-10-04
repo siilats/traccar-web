@@ -39,7 +39,11 @@ Ext.define('Traccar.view.edit.ToolbarController', {
                             if (success) {
                                 Traccar.app.showToast(response.status === 200 ? Strings.rideStopped : Strings.rideNotStopped);
                             } else {
-                                Traccar.app.showError(Strings.rideNotStopped);
+                                if (response.responseText) {
+                                    Traccar.app.showError(response.responseText);
+                                } else {
+                                    Traccar.app.showError(Strings.rideStopped);
+                                }
                             }
                         }
                     });
